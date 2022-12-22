@@ -44,6 +44,20 @@ ul.notes-list {
     outline: none;
 }
 
+.note textarea {
+    width: 100%;
+    margin: 1rem 0rem;
+    resize: none;
+}
+
+/* underline text input to indicate clickable area */
+.note input[type="text"] {
+    width: fit-content;
+    max-width: 100%;
+    background-color: rgba(255, 255, 255, 0.4);
+    /* border-bottom: 2px solid black; */
+}
+
 /* Remove arrow marker from all details elements */
 details > summary {
     list-style: none;
@@ -63,5 +77,5 @@ details > summary::-webkit-details-marker {
 
 /* style date font */
 .note span {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
 }

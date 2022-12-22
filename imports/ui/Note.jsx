@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import autosize from "autosize";
 
 export const Note = ({ note, destroy, open, update, toggleOpen }) => {
-    // pressing Space when input is in focus will cause details element to close
-    // prevent the default behaviour only when input focused.
+    // pressing Space when input focused closes details element.
+    // prevent the default behavior only when input in focus.
     const [titleFocus, setTitleFocus] = useState(false);
     const handleSpace = (e) => {
         if (e.code === "Space" && titleFocus) e.preventDefault();
     };
+
+    autosize(document.querySelector("textarea"));
 
     return (
         <li className="note">
@@ -34,6 +37,7 @@ export const Note = ({ note, destroy, open, update, toggleOpen }) => {
                     </span>
                 </summary>
                 <textarea
+                    autoFocus
                     value={note.text}
                     placeholder="(empty)"
                     onChange={(e) => update({ ...note, text: e.target.value })}
