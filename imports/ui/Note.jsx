@@ -1,34 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 
-export const Note = ({ note, destroy, open, update, toggleOpen }) => (
-    <li>
-        <details open={open} onClick={(e) => toggleOpen(e, note._id)}>
-            <summary>
-                {/* Title is an <h3> if note closed or an <input> if open */}
-                <span>
-                    {note.createdAt.toLocaleString("en-US", {
-                        hour12: true,
-                        dateStyle: "short",
-                        timeStyle: "short",
-                    })}
-                </span>
-                {open ? (
-                    <input
-                        type="text"
-                        value={note.title}
-                        onChange={(e) =>
-                            update({ ...note, title: e.target.value })
-                        }
-                    />
-                ) : (
-                    <h3>{note.title.substring(0, 20)}</h3>
-                )}
-            </summary>
-            <textarea
-                value={note.text}
-                onChange={(e) => update({ ...note, text: e.target.value })}
-            />
-            <input type="button" onClick={() => destroy(note)} value="delete" />
-        </details>
-    </li>
-);
+export const Note = ({ note, destroy, open, update, toggleOpen }) => {
+    // pressing Space when input is in focus will cause details element to close
+    // prevent the default behaviour only when input focused.
+    const [titleFocus, setTitleFocus] = useState(false);
+    const handleSpace = (e) => {
+        if (e.code === "Space" && titleFocus) e.preventDefault();
+    };
+
+    return (
+        <li className="note">
+            <details open={open} onClick={(e) => toggleOpen(e, note._id)}>
+                <summary onKeyUp={handleSpace}>
+                    {open ? (
+                        <input
+                            onFocus={() => setTitleFocus(true)}
+                            onBlur={() => setTitleFocus(false)}
+                            type="text"
+                            value={note.title}
+                            onChange={(e) =>
+                                update({ ...note, title: e.target.value })
+                            }
+                        />
+                    ) : (
+                        <h3>{note.title.substring(0, 20)}</h3>
+                    )}
+                    <span>
+                        {note.createdAt.toLocaleString("en-US", {
+                            hour12: true,
+                            dateStyle: "short",
+                            timeStyle: "short",
+                        })}
+                    </span>
+                </summary>
+                <textarea
+                    value={note.text}
+                    placeholder="(empty)"
+                    onChange={(e) => update({ ...note, text: e.target.value })}
+                />
+                <input
+                    type="button"
+                    onClick={() => destroy(note)}
+                    value="delete"
+                />
+            </details>
+        </li>
+    );
+};

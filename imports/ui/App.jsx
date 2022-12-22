@@ -42,8 +42,7 @@ export const App = () => {
             return;
         // prevents <details> element default behavior
         event.preventDefault();
-        // set openNote to the clicked note's id
-        // if already open, set it to empty (close the note)
+        // set openNote, or remove it if already open
         setOpenNote(openNote === id ? "" : id);
     };
 
@@ -54,7 +53,7 @@ export const App = () => {
                 New Note
             </button>
 
-            <ul>
+            <ul className="notes-list">
                 {notes.map((note) => (
                     <Note
                         key={note._id}

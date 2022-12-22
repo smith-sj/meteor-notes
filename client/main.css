@@ -1,4 +1,67 @@
+/* ---MAIN STYLES--- */
+
 body {
-  padding: 10px;
-  font-family: sans-serif;
+    padding: 10px;
+    font-family: sans-serif;
+}
+
+/* ---NOTES LIST--- */
+
+ul.notes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding-left: 0;
+    list-style: none;
+}
+
+/* ---NOTE--- */
+
+/* the outer li element */
+.note {
+    background: paleturquoise;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+/* make details and summary both columns */
+.note details summary {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+.note details {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+/* make note's Header(input) and text(textarea) not look like inputs */
+.note input[type="text"],
+.note textarea {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+/* Remove arrow marker from all details elements */
+details > summary {
+    list-style: none;
+}
+details > summary::-webkit-details-marker {
+    display: none;
+}
+
+/* style header text (input and h3) */
+.note h3,
+.note input[type="text"] {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin: 0;
+    padding: 0;
+}
+
+/* style date font */
+.note span {
+    font-size: 0.8rem;
 }
