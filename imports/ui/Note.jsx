@@ -29,21 +29,26 @@ export const Note = ({
 
     return (
         <li className="note">
-            {selectMode && (
-                <div className="container">
-                    <div className="round">
-                        <input
-                            type="checkbox"
-                            onChange={(e) => toggleSelect(e, note._id)}
-                            id={`checkbox${index}`}
-                        />
-                        <label htmlFor={`checkbox${index}`}>
-                            <div className="tick"></div>
-                        </label>
-                    </div>
+            <div
+                className="container"
+                style={{ left: selectMode ? "0" : "-2.3rem" }}
+            >
+                <div className="round">
+                    <input
+                        type="checkbox"
+                        onChange={(e) => toggleSelect(e, note._id)}
+                        id={`checkbox${index}`}
+                    />
+                    <label htmlFor={`checkbox${index}`}>
+                        <div className="tick"></div>
+                    </label>
                 </div>
-            )}
-            <details open={open} onClick={(e) => toggleOpen(e, note._id)}>
+            </div>
+            <details
+                open={open}
+                onClick={(e) => toggleOpen(e, note._id)}
+                style={{ left: selectMode ? "0" : "-2.3rem" }}
+            >
                 <summary onKeyUp={handleSpace}>
                     {open ? (
                         note && (
